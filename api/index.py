@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import csv
 import json
 import math
+import os
 
 app = FastAPI()
 
@@ -15,8 +16,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-CSV_FILE = "q-fastapi.csv"
-LATENCY_FILE = "q-vercel-latency.json"
+BASE_DIR = os.path.dirname(__file__)
+LATENCY_FILE = os.path.join(BASE_DIR, "..", "q-vercel-latency.json")
+CSV_FILE = os.path.join(BASE_DIR, "..", "q-fastapi.csv")
 
 def load_students():
     students = []
