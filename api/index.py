@@ -34,7 +34,14 @@ def load_students():
 # Explicit OPTIONS handler (critical on Vercel)
 @app.options("/{path:path}")
 async def options_handler(path: str):
-    return Response()
+    return Response(
+        status_code=200,
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "*",
+        },
+    )
 
 def percentile(values, p):
     if not values:
