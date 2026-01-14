@@ -39,7 +39,7 @@ def percentile(values, p):
     return values[max(0, k)]
 
 
-@app.get("/")
+@app.get("/api")
 async def get_students(req: Request):
     students = load_students()
     print(students)
@@ -50,7 +50,7 @@ async def get_students(req: Request):
 
     return {"students": students}
 
-@app.post("/latency")
+@app.post("/api/latency")
 async def post_latency(req: Request):
     body = await req.json()
     regions = body["regions"]
