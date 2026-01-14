@@ -7,6 +7,7 @@ import os
 
 app = FastAPI()
 
+
 # Enable CORS for all origins (GET only is enforced by route method)
 app.add_middleware(
     CORSMiddleware,
