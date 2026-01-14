@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 import csv
 import json
@@ -30,6 +30,11 @@ def load_students():
                 "class": row["class"]
             })
     return students
+
+# Explicit OPTIONS handler (critical on Vercel)
+@app.options("/{path:path}")
+async def options_handler(path: str):
+    return Response()
 
 def percentile(values, p):
     if not values:
