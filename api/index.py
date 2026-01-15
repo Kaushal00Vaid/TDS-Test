@@ -87,5 +87,5 @@ async def post_latency(req: Request):
             "breaches": sum(1 for x in latencies if x > threshold),
         }
     
-    return results
+    return {"regions": results}
 
