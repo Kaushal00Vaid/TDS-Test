@@ -47,9 +47,20 @@ async def options_handler(path: str):
 def percentile(values, p):
     if not values:
         return 0
+
     values = sorted(values)
-    k = math.ceil((p / 100) * len(values)) - 1
-    return values[max(0, k)]
+    n = len(values)
+
+    # position using linear interpolation (NumPy/Pandas default)
+    pos = (p / 100) * (n - 1)
+    lower = math.floor(pos)
+    upper = math.ceil(pos)
+
+    if lower == upper:
+        return values[int(pos)]
+
+    weight = pos - lower
+    return values[lower] * (1 - weight) + values[upper] * weight
 
 
 @app.get("/api")
